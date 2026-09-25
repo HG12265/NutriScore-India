@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: nutriscore_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ENV=production
+      - APP_PORT=8000
+      - APP_HOST=0.0.0.0
+      - CORS_ORIGINS=http://localhost:5173,http://127.0.0.1:5173
+      - DEFAULT_ALGORITHM_MODE=icmr_16_nutrient
+      - ENABLE_HISTORY=false
+      - MONGODB_URI=mongodb://mongodb:27017
+      - MONGODB_DATABASE=nutriscore
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: nutriscore_frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8000/api/v1
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:7.0
+    container_name: nutriscore_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+
+volumes:
+  mongo_data:
