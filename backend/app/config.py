@@ -1,5 +1,5 @@
 from typing import List, Union
-from pydantic import field_validator
+import json
 from pydantic_settings import BaseSettings
 
 
@@ -10,22 +10,28 @@ class Settings(BaseSettings):
     APP_HOST: str = "0.0.0.0"
     APP_PORT: int = 8000
     
-    # CORS settings
-    CORS_ORIGINS: List[str] = [
+    # CORS settings: accepts '*' string, comma-separated string, or list of strings
+    CORS_ORIGINS: Union[str, List[str]] = [
         "http://localhost:5173",
         "http://127.0.0.1:5173",
         "http://localhost:3000",
         "http://127.0.0.1:3000"
     ]
     
-    @field_validator("CORS_ORIGINS", mode="before")
-    @classmethod
-    def assemble_cors_origins(cls, v: Union[str, List[str]]) -> List[str]:
-        if isinstance(v, str):
-            if v.strip() == "*":
+    @property
+    def cors_origins_list(self) -> List[str]:
+        """Parsed list of CORS origin strings for middleware configuration."""
+        if isinstance(self.CORS_ORIGINS, str):
+            val = self.CORS_ORIGINS.strip()
+            if val == "*" or not val:
                 return ["*"]
-            return [i.strip() for i in v.split(",") if i.strip()]
-        return v
+            if val.startswith("[") and val.endswith("]"):
+                try:
+                    return json.loads(val)
+                except Exception:
+                    pass
+            return [o.strip() for o in val.split(",") if o.strip()]
+        return list(self.CORS_ORIGINS)
     
     # Algorithm configuration: icmr_16_nutrient | full_39_nutrient | official_nutri_score
     DEFAULT_ALGORITHM_MODE: str = "icmr_16_nutrient"
