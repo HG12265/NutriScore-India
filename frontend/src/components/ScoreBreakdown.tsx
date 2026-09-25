@@ -34,7 +34,7 @@ export const ScoreBreakdown: React.FC<ScoreBreakdownProps> = ({ result }) => {
               <span className="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block shadow-2xs" />
               Step 1: Negative Penalties (N)
             </span>
-            <span className="text-xs font-bold text-rose-700 bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200">
+            <span className="text-xs font-bold text-rose-700 bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200 whitespace-nowrap shrink-0">
               Total N: {score.negative_penalty} / {score.negative_max}
             </span>
           </div>
@@ -78,7 +78,7 @@ export const ScoreBreakdown: React.FC<ScoreBreakdownProps> = ({ result }) => {
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block shadow-2xs" />
                 Step 2: Positive Rewards (P)
               </span>
-              <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+              <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 whitespace-nowrap shrink-0">
                 Total P: {score.positive_score} / {score.positive_max}
               </span>
             </div>

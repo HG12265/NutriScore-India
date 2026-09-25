@@ -47,7 +47,7 @@ export const NutrientInputForm: React.FC<NutrientInputFormProps> = ({
             <div>
               <div className="flex items-center gap-2 flex-wrap">
                 <h3 className="text-base font-bold text-slate-900">Negative Nutrients to Limit</h3>
-                <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-200">
+                <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-200 whitespace-nowrap shrink-0">
                   0 – 10 pts penalty each
                 </span>
               </div>
@@ -190,7 +190,7 @@ export const NutrientInputForm: React.FC<NutrientInputFormProps> = ({
             <div>
               <div className="flex items-center gap-2 flex-wrap">
                 <h3 className="text-base font-bold text-slate-900">Protective Macronutrients & Lipids</h3>
-                <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
+                <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 whitespace-nowrap shrink-0">
                   Rewarding Points
                 </span>
               </div>
@@ -349,7 +349,7 @@ export const NutrientInputForm: React.FC<NutrientInputFormProps> = ({
             <div>
               <div className="flex items-center gap-2 flex-wrap">
                 <h3 className="text-base font-bold text-slate-900">Essential Micronutrients</h3>
-                <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-800 border border-teal-200">
+                <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-800 border border-teal-200 whitespace-nowrap shrink-0">
                   ICMR-NIN 2020 RDA Denominators
                 </span>
               </div>
@@ -528,23 +528,40 @@ export const NutrientInputForm: React.FC<NutrientInputFormProps> = ({
       {/* ------------------------------------------------------------- */}
       {/* 5. EXTENDED 39-NUTRIENT ACCORDION                            */}
       {/* ------------------------------------------------------------- */}
-      <div className="border border-slate-200/90 rounded-3xl bg-white overflow-hidden shadow-xs">
+      <div className="border border-slate-200/90 rounded-3xl bg-white overflow-hidden shadow-xs transition-all hover:border-slate-300">
         <button
           type="button"
           onClick={() => setShowExtended(!showExtended)}
-          className="w-full px-5 sm:px-7 py-4 flex items-center justify-between bg-slate-50/70 hover:bg-slate-100/70 active:bg-slate-100 transition-colors text-left"
+          className="w-full px-4 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between bg-gradient-to-r from-slate-50/90 via-slate-50/50 to-white hover:bg-slate-100/80 active:scale-[0.99] transition-all text-left gap-3"
+          aria-expanded={showExtended}
         >
-          <div className="flex items-center space-x-2.5">
-            <span className="text-xs sm:text-sm font-bold text-slate-800">
-              Extended Indian Databank (INDB) Micronutrients & Vitamins
-            </span>
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-700">
-              18 additional fields
-            </span>
+          <div className="flex items-center space-x-3 min-w-0">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100 shadow-2xs">
+              <Sparkles className="w-4 h-4" />
+            </div>
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-xs sm:text-sm font-bold text-slate-900 leading-tight">
+                  Extended Indian Databank (INDB)
+                </span>
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100/90 text-emerald-800 border border-emerald-200/80 whitespace-nowrap shrink-0 shadow-2xs">
+                  +18 Optional Fields
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-500 font-medium leading-tight mt-0.5 hidden xs:block truncate">
+                Trace minerals, B-complex vitamins & lab components
+              </p>
+            </div>
           </div>
-          <div className="flex items-center space-x-1.5 text-xs font-bold text-slate-500">
+
+          <div className="flex items-center space-x-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-200 shadow-2xs shrink-0 transition-all">
             <span className="hidden sm:inline">{showExtended ? 'Collapse fields' : 'Expand fields'}</span>
-            {showExtended ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            <span className="sm:hidden">{showExtended ? 'Collapse' : 'Expand'}</span>
+            {showExtended ? (
+              <ChevronUp className="w-3.5 h-3.5 text-slate-600 shrink-0" />
+            ) : (
+              <ChevronDown className="w-3.5 h-3.5 text-slate-600 shrink-0" />
+            )}
           </div>
         </button>
 
