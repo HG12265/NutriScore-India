@@ -25,6 +25,9 @@ export default {
           900: '#064e3b',
         }
       },
+      screens: {
+        'xs': '400px',
+      },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       }
