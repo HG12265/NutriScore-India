@@ -30,7 +30,7 @@ export const Header: React.FC<HeaderProps> = ({ onReset, onOpenInfo, hasResult }
               <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] sm:text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-300/50 leading-none shrink-0">
                 AI
               </span>
-              
+
               {/* ICMR RDA Badge */}
               <span className="hidden xs:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200/80 whitespace-nowrap shrink-0">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
@@ -57,18 +57,6 @@ export const Header: React.FC<HeaderProps> = ({ onReset, onOpenInfo, hasResult }
             <span className="hidden sm:inline">Standards & RDA</span>
             <span className="sm:hidden text-[11px]">Standards</span>
           </button>
-
-          {/* GitHub Source Link (visible on tablet/desktop) */}
-          <a
-            href="https://github.com/HG12265/NutriScore-India"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center space-x-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200 shadow-2xs active:scale-95 transition-all shrink-0"
-            title="View Open Source Repository on GitHub"
-          >
-            <Github className="w-3.5 h-3.5 text-slate-600 shrink-0" />
-            <span className="hidden md:inline">GitHub</span>
-          </a>
 
           {/* Reset Action */}
           <button
