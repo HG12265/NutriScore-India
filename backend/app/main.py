@@ -22,10 +22,11 @@ app = FastAPI(
 )
 
 # CORS configuration
+allow_all = "*" in settings.CORS_ORIGINS or settings.CORS_ORIGINS == ["*"]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS if settings.CORS_ORIGINS else ["*"],
-    allow_credentials=True,
+    allow_origins=["*"] if allow_all else settings.CORS_ORIGINS,
+    allow_credentials=False if allow_all else True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -43,6 +44,15 @@ async def root():
         "docs": "/docs",
         "api_v1": "/api/v1",
         "disclaimer": "This tool provides an algorithmic nutritional estimate based on entered values. It is not a medical diagnosis or personalized medical advice."
+    }
+
+
+@app.get("/health", tags=["Root"])
+async def root_health():
+    return {
+        "status": "healthy",
+        "app": settings.APP_NAME,
+        "version": settings.APP_VERSION
     }
 
 

@@ -1,0 +1,20 @@
+services:
+  # FastAPI Python Backend Service
+  - type: web
+    name: nutriscore-ai-backend
+    env: python
+    region: singapore
+    plan: free
+    rootDir: backend
+    buildCommand: pip install --no-cache-dir -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DEFAULT_ALGORITHM_MODE
+        value: icmr_16_nutrient
+      - key: ENABLE_HISTORY
+        value: "false"
+      - key: CORS_ORIGINS
+        value: "*"
