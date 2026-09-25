@@ -4,6 +4,7 @@ import { AlgorithmSelector } from './components/AlgorithmSelector';
 import { FoodDetailsForm } from './components/FoodDetailsForm';
 import { NutrientInputForm } from './components/NutrientInputForm';
 import { ActionButtons } from './components/ActionButtons';
+import { MobileActionBar } from './components/MobileActionBar';
 import { ResultCard } from './components/ResultCard';
 import { ScoreBreakdown } from './components/ScoreBreakdown';
 import { NutrientAnalysis } from './components/NutrientAnalysis';
@@ -14,7 +15,7 @@ import { AlgorithmInfoModal } from './components/AlgorithmInfoModal';
 import { FoodFormData, FoodAnalysisResponse, AlgorithmMode } from './types/nutrition';
 import { SAMPLE_RECIPES } from './services/sampleData';
 import { analyzeFood } from './services/api';
-import { ArrowDown, AlertCircle, Sparkles } from 'lucide-react';
+import { ArrowDown, AlertCircle, Sparkles, Table, Check } from 'lucide-react';
 
 const INITIAL_FORM_DATA: FoodFormData = {
   food_name: '',
@@ -89,7 +90,6 @@ export const App: React.FC = () => {
       ...prev,
       [field]: value,
     }));
-    // Clear inline error when user edits field
     if (errors[field]) {
       setErrors((prev) => {
         const next = { ...prev };
@@ -134,14 +134,13 @@ export const App: React.FC = () => {
     const newErrors: Record<string, string> = {};
 
     if (!formData.food_name.trim()) {
-      newErrors.food_name = 'Please provide a food or recipe name.';
+      newErrors.food_name = 'Please enter a food or recipe name.';
     }
 
     if (!formData.serving_size || Number(formData.serving_size) <= 0) {
-      newErrors.serving_size = 'Serving size must be greater than zero.';
+      newErrors.serving_size = 'Serving portion must be greater than zero.';
     }
 
-    // Negative check on all numerical inputs
     const numericalKeys: (keyof FoodFormData)[] = [
       'energy_kcal', 'free_sugars', 'saturated_fat', 'sodium', 'cholesterol',
       'protein', 'fibre', 'total_carbs', 'complex_carbs', 'mufa', 'pufa',
@@ -151,7 +150,7 @@ export const App: React.FC = () => {
     for (const key of numericalKeys) {
       const val = formData[key];
       if (val !== '' && Number(val) < 0) {
-        newErrors[key] = 'Nutrient cannot be a negative value.';
+        newErrors[key] = 'Nutrient cannot be negative.';
       }
     }
 
@@ -164,7 +163,6 @@ export const App: React.FC = () => {
     setApiError(null);
 
     if (!validateForm()) {
-      // Scroll to form error
       formSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
       return;
     }
@@ -175,7 +173,6 @@ export const App: React.FC = () => {
       const response = await analyzeFood(formData);
       setResult(response);
 
-      // Smooth scroll to result section
       setTimeout(() => {
         resultSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
@@ -191,58 +188,80 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-50 flex flex-col font-sans pb-24 md:pb-12">
       {/* Header */}
-      <Header onReset={handleReset} onOpenInfo={() => setIsInfoModalOpen(true)} />
+      <Header
+        onReset={handleReset}
+        onOpenInfo={() => setIsInfoModalOpen(true)}
+        hasResult={result !== null}
+      />
 
       {/* Hero / Introduction */}
-      <section className="bg-gradient-to-b from-emerald-50/60 via-slate-50 to-slate-50 border-b border-slate-200/60 py-10 px-4 sm:px-6 lg:px-8">
+      <section className="bg-gradient-to-b from-emerald-50/70 via-slate-50/50 to-slate-50 border-b border-slate-200/60 pt-8 pb-10 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-100/80 text-emerald-800 text-xs font-bold mb-4 shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-900 text-xs font-bold mb-4 shadow-2xs">
+            <Sparkles className="w-3.5 h-3.5 text-emerald-700" />
             <span>ICMR-NIN 2020 RDA & INDB Profiling Standard</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight sm:leading-tight">
-            Algorithmic Nutritional Profiling for Indian Recipes
+          <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight sm:leading-tight">
+            Indian Recipe Nutritional Profiling Engine
           </h2>
 
-          <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Enter nutrient parameters to instantly calculate a two-step Health Score (0–100) and 5-level color-coded Nutri-Score grade (A to E) calibrated for traditional Indian diets.
+          <p className="mt-2.5 text-xs sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed font-medium">
+            Enter recipe nutrients to calculate a two-step Health Score (0–100) and 5-color Nutri-Score grade (A to E) benchmarked against ICMR-NIN 2020 RDA guidelines.
           </p>
 
-          <div className="mt-6 flex items-center justify-center gap-3">
+          {/* Quick preset chips - mobile horizontally scrollable */}
+          <div className="mt-5 flex items-center justify-center gap-2 overflow-x-auto no-scrollbar py-1 px-2">
+            <span className="text-[11px] font-bold text-slate-400 shrink-0 hidden sm:inline">
+              Try Preset:
+            </span>
+            {[
+              { id: 'moong-dal', label: 'Moong Dal Tadka' },
+              { id: 'veg-khichdi', label: 'Vegetable Khichdi' },
+              { id: 'palak-paneer', label: 'Palak Paneer' },
+              { id: 'aloo-paratha', label: 'Aloo Paratha' },
+              { id: 'gulab-jamun', label: 'Gulab Jamun' },
+            ].map((preset) => (
+              <button
+                key={preset.id}
+                type="button"
+                onClick={() => handleLoadSample(preset.id)}
+                className="shrink-0 px-3 py-1.5 rounded-xl text-xs font-bold text-slate-700 bg-white hover:bg-emerald-50 hover:text-emerald-800 border border-slate-200/90 shadow-2xs active:scale-95 transition-all"
+              >
+                {preset.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Action anchors */}
+          <div className="mt-5 flex items-center justify-center gap-2 sm:gap-3 flex-wrap">
             <button
               type="button"
               onClick={scrollToForm}
-              className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm shadow-emerald-600/30 transition-all"
+              className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-2xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm shadow-emerald-600/30 active:scale-95 transition-all"
             >
-              <span>Analyze Food Below</span>
+              <span>Start Recipe Input</span>
               <ArrowDown className="w-3.5 h-3.5" />
             </button>
             <button
               type="button"
-              onClick={() => handleLoadSample('moong-dal')}
-              className="px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 bg-white hover:bg-slate-100 border border-slate-200 shadow-2xs transition-colors"
-            >
-              Try Moong Dal Preset
-            </button>
-            <button
-              type="button"
               onClick={() => setIsInfoModalOpen(true)}
-              className="px-4 py-2.5 rounded-xl text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 shadow-2xs transition-colors"
+              className="inline-flex items-center space-x-1.5 px-4 py-2.5 rounded-2xl text-xs font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-200 shadow-2xs active:scale-95 transition-all"
             >
-              View Threshold Tables 📊
+              <Table className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Official Threshold Tables</span>
             </button>
           </div>
         </div>
       </section>
 
       {/* Main Content Container */}
-      <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="flex-1 max-w-5xl w-full mx-auto px-3.5 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Error Alert Banner */}
         {apiError && (
-          <div className="mb-6 p-4 rounded-2xl bg-rose-50 border border-rose-200 flex items-start space-x-3">
+          <div className="mb-6 p-4 rounded-2xl bg-rose-50 border border-rose-200 flex items-start space-x-3 shadow-xs">
             <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
             <div>
               <h4 className="text-xs font-bold text-rose-900">Calculation Error</h4>
@@ -271,9 +290,10 @@ export const App: React.FC = () => {
             formData={formData}
             onChange={handleFieldChange}
             errors={errors}
+            onOpenTables={() => setIsInfoModalOpen(true)}
           />
 
-          {/* Action Buttons */}
+          {/* Desktop Action Buttons */}
           <ActionButtons
             onCalculate={handleCalculate}
             onReset={handleReset}
@@ -283,11 +303,11 @@ export const App: React.FC = () => {
         </div>
 
         {/* ------------------------------------------------------------- */}
-        {/* RESULT SECTION (ON THE SAME PAGE) */}
+        {/* RESULT SECTION (ON THE SAME PAGE)                             */}
         {/* ------------------------------------------------------------- */}
         <div ref={resultSectionRef} className="mt-12 pt-8 border-t border-slate-200">
           {result ? (
-            <div className="space-y-8 animate-in fade-in duration-500">
+            <div className="space-y-6 sm:space-y-8 animate-fade-in">
               <ResultCard result={result} />
               <ScoreBreakdown result={result} />
               <NutrientAnalysis result={result} />
@@ -295,13 +315,13 @@ export const App: React.FC = () => {
               <Recommendations result={result} />
             </div>
           ) : (
-            <div className="text-center py-12 px-4 rounded-3xl bg-white border border-dashed border-slate-200 text-slate-400">
+            <div className="text-center py-12 px-4 rounded-3xl bg-white border border-dashed border-slate-200 text-slate-400 shadow-2xs">
               <div className="w-12 h-12 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3">
                 <Sparkles className="w-6 h-6 text-slate-300" />
               </div>
               <h3 className="text-sm font-bold text-slate-700">No Calculation Performed Yet</h3>
-              <p className="text-xs text-slate-400 max-w-md mx-auto mt-1">
-                Fill in the nutrient values above or load a sample recipe, then click <strong>Calculate Result</strong> to view the NutriScore grade and score breakdown right here on this page.
+              <p className="text-xs text-slate-400 max-w-md mx-auto mt-1 leading-relaxed">
+                Enter your recipe nutrient values above or pick a sample preset, then tap <strong>Calculate Result</strong> to see the Health Score, Grade, and breakdown right here.
               </p>
             </div>
           )}
@@ -310,6 +330,14 @@ export const App: React.FC = () => {
         {/* Disclaimer */}
         <Disclaimer />
       </main>
+
+      {/* Floating Bottom Action Bar for Mobile */}
+      <MobileActionBar
+        onCalculate={handleCalculate}
+        onReset={handleReset}
+        isLoading={isLoading}
+        result={result}
+      />
 
       {/* Algorithm Info Modal */}
       <AlgorithmInfoModal
