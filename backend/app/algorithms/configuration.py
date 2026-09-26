@@ -26,6 +26,14 @@ ALGORITHM_METADATA = {
         "negative_max": 40.0,
         "positive_max": 15.0,
         "span": 55.0,
+    },
+    "personalised_pndpq": {
+        "title": "Personalised Protein Quality & Nutrient Density (PPQND) NutriScore",
+        "version": "2024-ICMR/FAO",
+        "description": "Evaluates dishes against individual demographic RDA requirements (11 life stages), 9 Essential Amino Acids, Complementary Protein synergy, and 7 chronic disease risk factors with a 7-tier grade (A+ to F).",
+        "negative_max": 100.0,
+        "positive_max": 100.0,
+        "span": 100.0,
     }
 }
 

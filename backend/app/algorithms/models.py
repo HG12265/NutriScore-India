@@ -8,6 +8,7 @@ class AlgorithmMode(str, Enum):
     ICMR_16 = "icmr_16_nutrient"
     FULL_39 = "full_39_nutrient"
     OFFICIAL_NS = "official_nutri_score"
+    PERSONALISED_PNDPQ = "personalised_pndpq"
 
 
 class NutrientCategory(str, Enum):

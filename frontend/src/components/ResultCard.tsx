@@ -1,12 +1,17 @@
 import React from 'react';
 import { Award, Clock, ArrowDown, ArrowUp, Sparkles, CheckCircle2 } from 'lucide-react';
 import { FoodAnalysisResponse } from '../types/nutrition';
+import { PersonalisedPanels } from './PersonalisedPanels';
 
 interface ResultCardProps {
   result: FoodAnalysisResponse;
 }
 
 export const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
+  if (result.personalised_result) {
+    return <PersonalisedPanels result={result.personalised_result} />;
+  }
+
   const { score, food_name, food_category, serving_size, serving_unit, algorithm_info, timestamp } = result;
 
   const grades: Array<{ key: 'A' | 'B' | 'C' | 'D' | 'E'; label: string; color: string }> = [

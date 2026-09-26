@@ -2,6 +2,7 @@
 from typing import List, Dict, Any, Optional
 from pydantic import BaseModel, Field
 from ..algorithms.models import NutrientScoreDetail
+from ..algorithms.personalised_scoring import PersonalisedNutriScoreResult
 
 
 class ScoreSummary(BaseModel):
@@ -35,6 +36,7 @@ class FoodAnalysisResponse(BaseModel):
     nutrient_analysis: NutrientAnalysisSummary
     recommendations: List[str]
     warnings: List[str] = Field(default_factory=list)
+    personalised_result: Optional[PersonalisedNutriScoreResult] = None
     disclaimer: str
     timestamp: Optional[str] = None
 

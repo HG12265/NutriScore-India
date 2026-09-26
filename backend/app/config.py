@@ -36,8 +36,8 @@ class Settings(BaseSettings):
     # Algorithm configuration: icmr_16_nutrient | full_39_nutrient | official_nutri_score
     DEFAULT_ALGORITHM_MODE: str = "icmr_16_nutrient"
     
-    # Optional MongoDB integration
-    ENABLE_HISTORY: bool = False
+    # MongoDB integration (Strictly MongoDB, no SQL)
+    ENABLE_HISTORY: bool = True
     MONGODB_URI: str = "mongodb://localhost:27017"
     MONGODB_DATABASE: str = "nutriscore"
 

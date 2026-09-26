@@ -23,12 +23,18 @@ const INITIAL_FORM_DATA: FoodFormData = {
   serving_size: 100,
   serving_unit: 'g',
   recipe_description: '',
-  algorithm_mode: 'icmr_16_nutrient',
+  algorithm_mode: 'personalised_pndpq',
+  demographic_profile: 'adult_male',
+  complementary_protein_source: 'cereal_pulse',
+  auto_estimate_eaas: true,
   
   // Negative
   energy_kcal: '',
   free_sugars: '',
+  added_sugars: '',
   saturated_fat: '',
+  trans_fat: '',
+  total_fat: '',
   sodium: '',
   cholesterol: '',
   
@@ -41,6 +47,18 @@ const INITIAL_FORM_DATA: FoodFormData = {
   // Fats
   mufa: '',
   pufa: '',
+  omega3: '',
+
+  // Essential Amino Acids
+  leucine: '',
+  lysine: '',
+  threonine: '',
+  histidine: '',
+  methionine_cysteine: '',
+  tryptophan: '',
+  valine: '',
+  isoleucine: '',
+  phenylalanine_tyrosine: '',
   
   // Core Micros
   iron: '',
@@ -276,6 +294,8 @@ export const App: React.FC = () => {
           <AlgorithmSelector
             selectedMode={formData.algorithm_mode}
             onSelectMode={handleSelectMode}
+            selectedDemographic={formData.demographic_profile}
+            onSelectDemographic={(demo) => handleFieldChange('demographic_profile', demo)}
           />
 
           {/* Step 1: Food Details */}

@@ -12,13 +12,18 @@ class FoodAnalysisRequest(BaseModel):
     serving_unit: str = Field("g", max_length=20, description="Unit e.g., g, ml, katori, bowl")
     recipe_description: Optional[str] = Field(None, max_length=500, description="Optional recipe notes or ingredient list")
     
-    # Algorithm Selection
+    # Algorithm Selection & Personalised Demographic Profile
     algorithm_mode: AlgorithmMode = Field(AlgorithmMode.ICMR_16, description="Scoring model version to utilize")
+    demographic_profile: Optional[str] = Field("adult_male", description="Life stage profile e.g. toddler, child, adolescent_male, adolescent_female, adult_male, adult_female, pregnant_woman, lactating_woman, senior_citizen, athlete")
+    complementary_protein_source: Optional[str] = Field("cereal_pulse", description="Protein complementarity matrix source e.g. cereal_pulse, pulse_dairy, soy_cereal, egg_pulse, animal_source, single_cereal, single_pulse")
 
     # Negative Nutrients (Core)
     energy_kcal: float = Field(0.0, ge=0, description="Energy density in kcal per serving")
     free_sugars: float = Field(0.0, ge=0, description="Free / added sugars in grams")
+    added_sugars: Optional[float] = Field(None, ge=0, description="Explicit added sugars in grams")
     saturated_fat: float = Field(0.0, ge=0, description="Saturated fat in grams")
+    trans_fat: Optional[float] = Field(0.0, ge=0, description="Trans fatty acids in grams")
+    total_fat: Optional[float] = Field(0.0, ge=0, description="Total fat in grams")
     sodium: float = Field(0.0, ge=0, description="Sodium in milligrams")
     cholesterol: float = Field(0.0, ge=0, description="Cholesterol in milligrams")
 
@@ -31,6 +36,18 @@ class FoodAnalysisRequest(BaseModel):
     # Beneficial Fatty Acids
     mufa: Optional[float] = Field(0.0, ge=0, description="Monounsaturated fatty acids in grams")
     pufa: Optional[float] = Field(0.0, ge=0, description="Polyunsaturated fatty acids in grams")
+    omega3: Optional[float] = Field(0.0, ge=0, description="Omega-3 fatty acids in grams")
+
+    # Essential Amino Acids (Optional - auto-estimated from protein source if omitted)
+    leucine: Optional[float] = Field(None, ge=0, description="Leucine in mg")
+    lysine: Optional[float] = Field(None, ge=0, description="Lysine in mg")
+    threonine: Optional[float] = Field(None, ge=0, description="Threonine in mg")
+    histidine: Optional[float] = Field(None, ge=0, description="Histidine in mg")
+    methionine_cysteine: Optional[float] = Field(None, ge=0, description="Methionine + Cysteine in mg")
+    tryptophan: Optional[float] = Field(None, ge=0, description="Tryptophan in mg")
+    valine: Optional[float] = Field(None, ge=0, description="Valine in mg")
+    isoleucine: Optional[float] = Field(None, ge=0, description="Isoleucine in mg")
+    phenylalanine_tyrosine: Optional[float] = Field(None, ge=0, description="Phenylalanine + Tyrosine in mg")
 
     # Core Micronutrients (ICMR 16 Model)
     iron: Optional[float] = Field(0.0, ge=0, description="Iron in milligrams")

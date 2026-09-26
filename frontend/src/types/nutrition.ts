@@ -1,4 +1,4 @@
-export type AlgorithmMode = 'icmr_16_nutrient' | 'full_39_nutrient' | 'official_nutri_score';
+export type AlgorithmMode = 'icmr_16_nutrient' | 'full_39_nutrient' | 'official_nutri_score' | 'personalised_pndpq';
 
 export interface NutrientScoreDetail {
   nutrient_key: string;
@@ -14,7 +14,7 @@ export interface NutrientScoreDetail {
 
 export interface ScoreSummary {
   health_score: number;
-  grade: 'A' | 'B' | 'C' | 'D' | 'E';
+  grade: 'A+' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | string;
   grade_color: string;
   grade_label: string;
   grade_description: string;
@@ -39,6 +39,54 @@ export interface AlgorithmInfo {
   description: string;
 }
 
+export interface DiagnosticPanelItem {
+  nutrient_key: string;
+  label: string;
+  unit: string;
+  amount_per_serving: number;
+  individual_requirement: number;
+  requirement_fulfilled_pct: number;
+  score_points: number;
+  status: string;
+}
+
+export interface PersonalisedNutriScoreResult {
+  food_name: string;
+  serving_size_g: number;
+  demographic_key: string;
+  demographic_label: string;
+  demographic_description: string;
+  nutriscore: number;
+  grade: string;
+  grade_color: string;
+  grade_label: string;
+  grade_description: string;
+  positive_nutrient_score: number;
+  negative_risk_score: number;
+  benefit_risk_balance: number;
+  weighted_amino_acid_score: number;
+  limiting_amino_acid?: string;
+  complementary_protein_label: string;
+  complementary_protein_score: number;
+  nutrient_density_panel: DiagnosticPanelItem[];
+  protein_quality_panel: {
+    weighted_amino_acid_score: number;
+    limiting_amino_acid?: string;
+    complementary_combination: string;
+    complementary_score: number;
+    complementary_description: string;
+    amino_acid_coverages: Record<string, {
+      mg_in_serving: number;
+      daily_requirement_mg: number;
+      coverage_pct: number;
+      score: number;
+    }>;
+    biological_value_tier: string;
+  };
+  chronic_risk_panel: DiagnosticPanelItem[];
+  demographic_insights: string[];
+}
+
 export interface FoodAnalysisResponse {
   success: boolean;
   food_name: string;
@@ -52,6 +100,39 @@ export interface FoodAnalysisResponse {
   warnings?: string[];
   disclaimer: string;
   timestamp?: string;
+  personalised_result?: PersonalisedNutriScoreResult;
+}
+
+export interface DemographicProfile {
+  key: string;
+  label: string;
+  age_range: string;
+  sex: string;
+  description: string;
+  body_weight_kg: number;
+  energy_kcal: number;
+  protein_g: number;
+  fibre_g: number;
+  calcium_mg: number;
+  iron_mg: number;
+  zinc_mg: number;
+  potassium_mg: number;
+  vitamin_a_mcg: number;
+  vitamin_c_mg: number;
+  vitamin_d_mcg: number;
+  vitamin_b1_mg: number;
+  vitamin_b2_mg: number;
+  vitamin_b6_mg: number;
+  vitamin_b9_mcg: number;
+  vitamin_b12_mcg: number;
+  omega3_g: number;
+  max_sodium_mg: number;
+  max_saturated_fat_g: number;
+  max_added_sugar_g: number;
+  max_trans_fat_g: number;
+  max_cholesterol_mg: number;
+  max_total_fat_g: number;
+  eaa_requirements_mg?: Record<string, number>;
 }
 
 export interface FoodFormData {
@@ -62,10 +143,18 @@ export interface FoodFormData {
   recipe_description: string;
   algorithm_mode: AlgorithmMode;
   
+  // Demographic and Complementary settings
+  demographic_profile?: string;
+  complementary_protein_source?: string;
+  auto_estimate_eaas?: boolean;
+
   // Negative nutrients
   energy_kcal: number | '';
   free_sugars: number | '';
+  added_sugars?: number | '';
   saturated_fat: number | '';
+  trans_fat?: number | '';
+  total_fat?: number | '';
   sodium: number | '';
   cholesterol: number | '';
   
@@ -78,7 +167,19 @@ export interface FoodFormData {
   // Fatty acids
   mufa: number | '';
   pufa: number | '';
+  omega3?: number | '';
   
+  // Essential Amino Acids (Optional / mg)
+  leucine?: number | '';
+  lysine?: number | '';
+  threonine?: number | '';
+  histidine?: number | '';
+  methionine_cysteine?: number | '';
+  tryptophan?: number | '';
+  valine?: number | '';
+  isoleucine?: number | '';
+  phenylalanine_tyrosine?: number | '';
+
   // Core micronutrients
   iron: number | '';
   calcium: number | '';

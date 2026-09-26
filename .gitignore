@@ -43,3 +43,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# Heavy scientific reference manuals (kept locally)
+Dietary Guidelines for Indians .pdf
+IFCT2017.pdf
+RDA-revised-2024.pdf

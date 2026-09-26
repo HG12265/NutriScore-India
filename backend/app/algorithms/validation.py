@@ -28,7 +28,10 @@ def validate_nutrient_inputs(data: Dict[str, Any]) -> Tuple[bool, List[str], Lis
         
     # 3. Numeric & Non-Negative Validation on All Nutrient Fields
     for key, value in data.items():
-        if key in ("food_name", "food_category", "serving_unit", "recipe_description", "algorithm_mode"):
+        if key in (
+            "food_name", "food_category", "serving_unit", "recipe_description",
+            "algorithm_mode", "demographic_profile", "complementary_protein_source"
+        ):
             continue
         if value is None:
             continue

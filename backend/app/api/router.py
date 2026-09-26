@@ -1,6 +1,6 @@
 """Aggregates all API v1 routes."""
 from fastapi import APIRouter
-from .endpoints import health, info, analyze, history
+from .endpoints import health, info, analyze, history, demographics
 
 api_router = APIRouter(prefix="/api/v1")
 
@@ -8,3 +8,4 @@ api_router.include_router(health.router, tags=["Health"])
 api_router.include_router(info.router, tags=["Algorithm Metadata"])
 api_router.include_router(analyze.router, tags=["NutriScore Analysis"])
 api_router.include_router(history.router, tags=["Analysis History"])
+api_router.include_router(demographics.router, tags=["Demographics & Protein Quality"])

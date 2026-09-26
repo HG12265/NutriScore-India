@@ -7,6 +7,7 @@ import {
   ChevronUp,
   Sparkles,
   Info,
+  Dna,
 } from 'lucide-react';
 import { FoodFormData } from '../types/nutrition';
 
@@ -173,6 +174,74 @@ export const NutrientInputForm: React.FC<NutrientInputFormProps> = ({
             </div>
             <p className="mt-1 text-[10px] text-slate-400 font-medium">Optimal: ≤ 10 mg</p>
           </div>
+
+          {/* Conditional Personalised PPQND Negative Factors */}
+          {formData.algorithm_mode === 'personalised_pndpq' && (
+            <>
+              {/* Added Sugars */}
+              <div className="col-span-1">
+                <label htmlFor="added_sugars" className="block text-xs font-bold text-slate-700 mb-1">
+                  Added Sugars
+                </label>
+                <div className="relative rounded-2xl shadow-2xs border border-slate-300 focus-within:border-rose-500 focus-within:ring-3 focus-within:ring-rose-500/15 transition-all overflow-hidden bg-white">
+                  <input
+                    id="added_sugars"
+                    type="number"
+                    min="0"
+                    step="any"
+                    value={formData.added_sugars ?? ''}
+                    onChange={(e) => onChange('added_sugars', e.target.value === '' ? '' : Number(e.target.value))}
+                    placeholder="0"
+                    className="w-full px-3.5 py-3 text-sm bg-white focus:outline-none pr-8 font-medium"
+                  />
+                  <span className="absolute right-3 top-3 text-xs font-bold text-slate-400 pointer-events-none">g</span>
+                </div>
+                <p className="mt-1 text-[10px] text-slate-400 font-medium">WHO Limit: 25g/day</p>
+              </div>
+
+              {/* Trans Fat */}
+              <div className="col-span-1">
+                <label htmlFor="trans_fat" className="block text-xs font-bold text-slate-700 mb-1">
+                  Trans Fat
+                </label>
+                <div className="relative rounded-2xl shadow-2xs border border-slate-300 focus-within:border-rose-500 focus-within:ring-3 focus-within:ring-rose-500/15 transition-all overflow-hidden bg-white">
+                  <input
+                    id="trans_fat"
+                    type="number"
+                    min="0"
+                    step="any"
+                    value={formData.trans_fat ?? ''}
+                    onChange={(e) => onChange('trans_fat', e.target.value === '' ? '' : Number(e.target.value))}
+                    placeholder="0"
+                    className="w-full px-3.5 py-3 text-sm bg-white focus:outline-none pr-8 font-medium"
+                  />
+                  <span className="absolute right-3 top-3 text-xs font-bold text-slate-400 pointer-events-none">g</span>
+                </div>
+                <p className="mt-1 text-[10px] text-slate-400 font-medium">Safe target: 0g</p>
+              </div>
+
+              {/* Total Fat */}
+              <div className="col-span-1">
+                <label htmlFor="total_fat" className="block text-xs font-bold text-slate-700 mb-1">
+                  Total Fat
+                </label>
+                <div className="relative rounded-2xl shadow-2xs border border-slate-300 focus-within:border-rose-500 focus-within:ring-3 focus-within:ring-rose-500/15 transition-all overflow-hidden bg-white">
+                  <input
+                    id="total_fat"
+                    type="number"
+                    min="0"
+                    step="any"
+                    value={formData.total_fat ?? ''}
+                    onChange={(e) => onChange('total_fat', e.target.value === '' ? '' : Number(e.target.value))}
+                    placeholder="0"
+                    className="w-full px-3.5 py-3 text-sm bg-white focus:outline-none pr-8 font-medium"
+                  />
+                  <span className="absolute right-3 top-3 text-xs font-bold text-slate-400 pointer-events-none">g</span>
+                </div>
+                <p className="mt-1 text-[10px] text-slate-400 font-medium">Limit: 30g/day</p>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
@@ -332,8 +401,145 @@ export const NutrientInputForm: React.FC<NutrientInputFormProps> = ({
             </div>
             <p className="mt-1 text-[10px] text-slate-400 font-medium">Max pts: ≥ 5g</p>
           </div>
+
+          {/* Omega-3 Fatty Acids */}
+          <div className="col-span-1">
+            <label htmlFor="omega3" className="block text-xs font-bold text-slate-700 mb-1">
+              Omega-3 (ALA/EPA)
+            </label>
+            <div className="relative rounded-2xl shadow-2xs border border-slate-300 focus-within:border-emerald-500 focus-within:ring-3 focus-within:ring-emerald-500/15 transition-all overflow-hidden bg-white">
+              <input
+                id="omega3"
+                type="number"
+                min="0"
+                step="any"
+                value={formData.omega3 ?? ''}
+                onChange={(e) => onChange('omega3', e.target.value === '' ? '' : Number(e.target.value))}
+                placeholder="0"
+                className="w-full px-3.5 py-3 text-sm bg-white focus:outline-none pr-8 font-medium"
+              />
+              <span className="absolute right-3 top-3 text-xs font-bold text-slate-400 pointer-events-none">g</span>
+            </div>
+            <p className="mt-1 text-[10px] text-slate-400 font-medium">Target: ≥ 1.0g</p>
+          </div>
         </div>
       </div>
+
+      {/* ------------------------------------------------------------- */}
+      {/* 2.5 PROTEIN QUALITY & 9 ESSENTIAL AMINO ACIDS (PPQND)        */}
+      {/* ------------------------------------------------------------- */}
+      {formData.algorithm_mode === 'personalised_pndpq' && (
+        <div className="bg-white rounded-3xl p-5 sm:p-7 border border-emerald-300 shadow-xs relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-emerald-600 via-teal-500 to-emerald-700" />
+
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-5 border-b border-emerald-100 gap-2">
+            <div className="flex items-center space-x-3">
+              <div className="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 shadow-xs">
+                <Dna className="w-4 h-4 text-emerald-700" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="text-base font-bold text-slate-900">Protein Quality & Amino Acid Matrix</h3>
+                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 whitespace-nowrap shrink-0">
+                    40% Score Weight
+                  </span>
+                </div>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Evaluates the 9 Essential Amino Acids, DIAAS synergy, and Indian complementary protein combinations.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            {/* Complementarity Selector */}
+            <div>
+              <label htmlFor="complementary_protein_source" className="block text-xs font-bold text-slate-700 mb-1">
+                Complementary Protein Matrix <span className="text-emerald-600">*</span>
+              </label>
+              <select
+                id="complementary_protein_source"
+                value={formData.complementary_protein_source || 'cereal_pulse'}
+                onChange={(e) => onChange('complementary_protein_source', e.target.value)}
+                className="w-full px-3.5 py-2.5 text-xs font-semibold text-slate-800 bg-emerald-50/40 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              >
+                <option value="cereal_pulse">Cereal + Pulse (Rice + Dal, Roti + Chana) [Synergy: 8/10]</option>
+                <option value="cereal_dairy">Cereal + Dairy (Dalia + Milk, Kheer) [Synergy: 8/10]</option>
+                <option value="pulse_dairy">Pulse + Dairy (Palak Paneer, Dal + Curd) [Synergy: 9/10]</option>
+                <option value="soy_cereal">Soybean + Cereal (Soya Pulao, Tofu Fried Rice) [Synergy: 9/10]</option>
+                <option value="egg_pulse">Egg + Plant Protein (Egg Curry with Dal) [Synergy: 10/10]</option>
+                <option value="animal_source">Complete Animal / Fish Protein [Synergy: 9/10]</option>
+                <option value="single_cereal">Single Cereal Grain alone (Lysine limited) [Synergy: 2/10]</option>
+                <option value="single_pulse">Single Pulse alone (Methionine limited) [Synergy: 4/10]</option>
+                <option value="mixed_legumes">Mixed Legumes & Seeds [Synergy: 5/10]</option>
+              </select>
+              <p className="mt-1 text-[11px] text-slate-500">
+                Balances amino acid kinetics (e.g. Lysine in pulses offsets Lysine deficiency in cereals).
+              </p>
+            </div>
+
+            {/* Smart Auto-Estimation Toggle */}
+            <div className="flex flex-col justify-center bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
+              <label className="flex items-center gap-2.5 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={formData.auto_estimate_eaas !== false}
+                  onChange={(e) => onChange('auto_estimate_eaas', e.target.checked)}
+                  className="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 border-slate-300"
+                />
+                <span className="text-xs font-bold text-slate-800">
+                  Auto-estimate 9 Essential Amino Acids from recipe protein
+                </span>
+              </label>
+              <p className="text-[11px] text-slate-500 mt-1 pl-6">
+                Recommended: Derives Leucine, Lysine, etc. based on {formData.protein || 0}g crude protein and food source. Uncheck to enter laboratory mg values directly.
+              </p>
+            </div>
+          </div>
+
+          {/* Optional Manual 9 EAAs Fields */}
+          {formData.auto_estimate_eaas === false && (
+            <div className="mt-4 pt-4 border-t border-slate-100">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700 mb-3">
+                Laboratory Essential Amino Acids (mg per serving)
+              </h4>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                {[
+                  { id: 'leucine', label: 'Leucine', opt: 'MPS driver' },
+                  { id: 'lysine', label: 'Lysine', opt: 'Cereal limiting' },
+                  { id: 'threonine', label: 'Threonine', opt: 'Gut integrity' },
+                  { id: 'histidine', label: 'Histidine', opt: 'Tissue repair' },
+                  { id: 'methionine_cysteine', label: 'Met + Cys', opt: 'Pulse limiting' },
+                  { id: 'tryptophan', label: 'Tryptophan', opt: 'Neurotransmitter' },
+                  { id: 'valine', label: 'Valine', opt: 'BCAA muscle' },
+                  { id: 'isoleucine', label: 'Isoleucine', opt: 'BCAA energy' },
+                  { id: 'phenylalanine_tyrosine', label: 'Phe + Tyr', opt: 'Aromatic' },
+                ].map((aa) => (
+                  <div key={aa.id} className="col-span-1">
+                    <label htmlFor={aa.id} className="block text-[11px] font-bold text-slate-700 mb-1">
+                      {aa.label}
+                    </label>
+                    <div className="relative rounded-xl border border-slate-300 focus-within:border-emerald-500 bg-white">
+                      <input
+                        id={aa.id}
+                        type="number"
+                        min="0"
+                        step="any"
+                        value={(formData as any)[aa.id] ?? ''}
+                        onChange={(e) => onChange(aa.id as any, e.target.value === '' ? '' : Number(e.target.value))}
+                        placeholder="0"
+                        className="w-full px-2.5 py-2 text-xs bg-white focus:outline-none pr-8 font-medium"
+                      />
+                      <span className="absolute right-2 top-2 text-[10px] font-bold text-slate-400">mg</span>
+                    </div>
+                    <p className="mt-0.5 text-[9px] text-slate-400">{aa.opt}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* ------------------------------------------------------------- */}
       {/* 3. CORE MICRONUTRIENTS (ICMR-NIN 2020 RDA CALIBRATED)         */}
