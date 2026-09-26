@@ -474,7 +474,7 @@ def calculate_nutriscore(data: Dict[str, Any], mode: AlgorithmMode = AlgorithmMo
         recommendations.append("The food displays a balanced nutrient composition for its food group.")
 
     disclaimer = (
-        "This tool provides an algorithmic nutritional estimate based on entered values and ICMR-NIN 2020 reference guidelines. "
+        "This tool provides an algorithmic nutritional estimate based on entered values and ICMR-NIN 2024 reference guidelines. "
         "It is designed for educational and profiling research purposes, not for medical diagnosis or clinical treatment."
     )
 

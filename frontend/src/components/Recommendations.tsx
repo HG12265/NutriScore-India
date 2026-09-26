@@ -18,7 +18,7 @@ export const Recommendations: React.FC<RecommendationsProps> = ({ result }) => {
         <div>
           <h3 className="text-base font-bold text-slate-900">Dietary Optimization & Balance Tips</h3>
           <p className="text-xs text-slate-500">
-            Actionable dietary modifications benchmarked against ICMR-NIN 2020 national nutritional guidelines.
+            Actionable dietary modifications benchmarked against ICMR-NIN 2024 national nutritional guidelines.
           </p>
         </div>
       </div>
