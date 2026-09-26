@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, RotateCcw, Github, ShieldCheck } from 'lucide-react';
+import { BookOpen, RotateCcw, Github } from 'lucide-react';
 
 interface HeaderProps {
   onReset: () => void;
@@ -15,10 +15,14 @@ export const Header: React.FC<HeaderProps> = ({ onReset, onOpenInfo, hasResult }
 
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2">
         {/* Brand Logo & Name */}
-        <div className="flex items-center space-x-2 sm:space-x-3 shrink-0 min-w-0">
+        <div className="flex items-center space-x-2.5 sm:space-x-3 shrink-0 min-w-0">
           {/* Logo Mark */}
-          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-emerald-600 via-emerald-500 to-teal-400 flex items-center justify-center shadow-sm shadow-emerald-600/25 ring-1 ring-white/30 text-white shrink-0">
-            <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+          <div className="relative shrink-0 flex items-center">
+            <img
+              src="/logo.png"
+              alt="NutriScore AI Logo"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl object-contain shadow-sm ring-1 ring-emerald-500/20 hover:scale-105 transition-transform duration-200"
+            />
           </div>
 
           {/* Brand Titles */}
