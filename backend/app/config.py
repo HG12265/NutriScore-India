@@ -38,7 +38,7 @@ class Settings(BaseSettings):
     
     # MongoDB integration (Strictly MongoDB, no SQL)
     ENABLE_HISTORY: bool = True
-    MONGODB_URI: str = "mongodb://localhost:27017"
+    MONGODB_URI: str = "mongodb+srv://nutriscoreindia_db_user:dlzDkNpP6aMSFj4e@cluster0.3thw6ts.mongodb.net/?retryWrites=true&w=majority"
     MONGODB_DATABASE: str = "nutriscore"
 
     model_config = {
