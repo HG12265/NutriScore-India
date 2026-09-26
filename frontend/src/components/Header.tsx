@@ -38,12 +38,12 @@ export const Header: React.FC<HeaderProps> = ({ onReset, onOpenInfo, hasResult }
               {/* ICMR RDA Badge */}
               <span className="hidden xs:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200/80 whitespace-nowrap shrink-0">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                <span>ICMR 2020</span>
+                <span>ICMR 2024</span>
               </span>
             </div>
 
             <p className="text-[10px] text-slate-500 hidden md:block font-medium tracking-normal leading-none mt-0.5 truncate">
-              Indian Food Nutrient Profiling Engine • INDB & ICMR-NIN RDA
+              Indian Food Nutrient Profiling Engine • IFCT 2017 & ICMR-NIN 2024 RDA
             </p>
           </div>
         </div>

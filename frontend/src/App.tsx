@@ -219,7 +219,7 @@ export const App: React.FC = () => {
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-900 text-xs font-bold mb-4 shadow-2xs">
             <Sparkles className="w-3.5 h-3.5 text-emerald-700" />
-            <span>ICMR-NIN 2020 RDA & INDB Profiling Standard</span>
+            <span>ICMR-NIN 2024 RDA & IFCT 2017 Profiling Standard</span>
           </div>
 
           <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight sm:leading-tight">
@@ -227,7 +227,7 @@ export const App: React.FC = () => {
           </h2>
 
           <p className="mt-2.5 text-xs sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed font-medium">
-            Enter recipe nutrients to calculate a two-step Health Score (0–100) and 5-color Nutri-Score grade (A to E) benchmarked against ICMR-NIN 2020 RDA guidelines.
+            Enter recipe nutrients to calculate a two-step Health Score (0–100) and 5-color Nutri-Score grade (A to E) benchmarked against ICMR-NIN 2024 RDA & Dietary Guidelines.
           </p>
 
           {/* Quick preset chips - mobile horizontally scrollable */}

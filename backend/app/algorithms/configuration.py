@@ -37,40 +37,40 @@ ALGORITHM_METADATA = {
     },
 }
 
-# Standard Reference Daily Values (Adult Moderate Work baseline based on ICMR-NIN 2020)
+# Standard Reference Daily Values (Adult Moderate Work baseline based on ICMR-NIN 2024 Revised RDA)
 # Trace nutrients without specific ICMR-NIN values utilize FDA/WHO established daily values.
 ICMR_DAILY_VALUES: Dict[str, Dict[str, Any]] = {
     # Macros
-    "protein": {"dv": 54.0, "unit": "g", "source": "ICMR-NIN 2020 (0.83g/kg for 65kg reference man)"},
-    "fibre": {"dv": 40.0, "unit": "g", "source": "ICMR-NIN 2020 (moderate work)"},
+    "protein": {"dv": 54.0, "unit": "g", "source": "ICMR-NIN 2024 (0.83g/kg for 65kg reference man)"},
+    "fibre": {"dv": 40.0, "unit": "g", "source": "ICMR-NIN 2024 (moderate work)"},
     
-    # Minerals (11 components in INDB)
-    "calcium": {"dv": 1000.0, "unit": "mg", "source": "ICMR-NIN 2020"},
-    "iron": {"dv": 19.0, "unit": "mg", "source": "ICMR-NIN 2020"},
-    "zinc": {"dv": 17.0, "unit": "mg", "source": "ICMR-NIN 2020"},
-    "magnesium": {"dv": 440.0, "unit": "mg", "source": "ICMR-NIN 2020"},
-    "potassium": {"dv": 3500.0, "unit": "mg", "source": "ICMR-NIN 2020 / WHO"},
-    "phosphorus": {"dv": 1000.0, "unit": "mg", "source": "ICMR-NIN 2020"},
-    "copper": {"dv": 2.0, "unit": "mg", "source": "ICMR-NIN 2020"},
-    "manganese": {"dv": 4.0, "unit": "mg", "source": "ICMR-NIN 2020"},
-    "selenium": {"dv": 40.0, "unit": "mcg", "source": "ICMR-NIN 2020"},
-    "chromium": {"dv": 50.0, "unit": "mcg", "source": "ICMR-NIN 2020"},
-    "molybdenum": {"dv": 45.0, "unit": "mcg", "source": "ICMR-NIN 2020 / FDA"},
+    # Minerals (11 components in INDB / IFCT 2017)
+    "calcium": {"dv": 1000.0, "unit": "mg", "source": "ICMR-NIN 2024"},
+    "iron": {"dv": 19.0, "unit": "mg", "source": "ICMR-NIN 2024"},
+    "zinc": {"dv": 17.0, "unit": "mg", "source": "ICMR-NIN 2024"},
+    "magnesium": {"dv": 440.0, "unit": "mg", "source": "ICMR-NIN 2024"},
+    "potassium": {"dv": 3500.0, "unit": "mg", "source": "ICMR-NIN 2024 / WHO"},
+    "phosphorus": {"dv": 1000.0, "unit": "mg", "source": "ICMR-NIN 2024"},
+    "copper": {"dv": 2.0, "unit": "mg", "source": "ICMR-NIN 2024"},
+    "manganese": {"dv": 4.0, "unit": "mg", "source": "ICMR-NIN 2024"},
+    "selenium": {"dv": 40.0, "unit": "mcg", "source": "ICMR-NIN 2024"},
+    "chromium": {"dv": 50.0, "unit": "mcg", "source": "ICMR-NIN 2024"},
+    "molybdenum": {"dv": 45.0, "unit": "mcg", "source": "ICMR-NIN 2024 / FDA"},
     
-    # Vitamins (13 components in INDB)
-    "vitamin_a": {"dv": 1000.0, "unit": "mcg", "source": "ICMR-NIN 2020 (RAE)"},
-    "vitamin_c": {"dv": 80.0, "unit": "mg", "source": "ICMR-NIN 2020"},
-    "vitamin_d": {"dv": 20.0, "unit": "mcg", "source": "ICMR-NIN 2020 (800 IU)"},
-    "vitamin_e": {"dv": 10.0, "unit": "mg", "source": "ICMR-NIN 2020"},
-    "vitamin_k": {"dv": 55.0, "unit": "mcg", "source": "ICMR-NIN 2020"},
-    "thiamin_b1": {"dv": 1.4, "unit": "mg", "source": "ICMR-NIN 2020"},
-    "riboflavin_b2": {"dv": 1.6, "unit": "mg", "source": "ICMR-NIN 2020"},
-    "niacin_b3": {"dv": 14.0, "unit": "mg", "source": "ICMR-NIN 2020"},
-    "pantothenic_acid_b5": {"dv": 5.0, "unit": "mg", "source": "ICMR-NIN 2020 / FDA"},
-    "vitamin_b6": {"dv": 2.0, "unit": "mg", "source": "ICMR-NIN 2020"},
-    "biotin_b7": {"dv": 40.0, "unit": "mcg", "source": "ICMR-NIN 2020 / FDA"},
-    "folate_b9": {"dv": 300.0, "unit": "mcg", "source": "ICMR-NIN 2020"},
-    "vitamin_b12": {"dv": 2.5, "unit": "mcg", "source": "ICMR-NIN 2020"},
+    # Vitamins (13 components in INDB / IFCT 2017)
+    "vitamin_a": {"dv": 1000.0, "unit": "mcg", "source": "ICMR-NIN 2024 (RAE)"},
+    "vitamin_c": {"dv": 80.0, "unit": "mg", "source": "ICMR-NIN 2024"},
+    "vitamin_d": {"dv": 20.0, "unit": "mcg", "source": "ICMR-NIN 2024 (800 IU)"},
+    "vitamin_e": {"dv": 10.0, "unit": "mg", "source": "ICMR-NIN 2024"},
+    "vitamin_k": {"dv": 55.0, "unit": "mcg", "source": "ICMR-NIN 2024"},
+    "thiamin_b1": {"dv": 1.4, "unit": "mg", "source": "ICMR-NIN 2024"},
+    "riboflavin_b2": {"dv": 1.6, "unit": "mg", "source": "ICMR-NIN 2024"},
+    "niacin_b3": {"dv": 14.0, "unit": "mg", "source": "ICMR-NIN 2024"},
+    "pantothenic_acid_b5": {"dv": 5.0, "unit": "mg", "source": "ICMR-NIN 2024 / FDA"},
+    "vitamin_b6": {"dv": 2.0, "unit": "mg", "source": "ICMR-NIN 2024"},
+    "biotin_b7": {"dv": 40.0, "unit": "mcg", "source": "ICMR-NIN 2024 / FDA"},
+    "folate_b9": {"dv": 300.0, "unit": "mcg", "source": "ICMR-NIN 2024"},
+    "vitamin_b12": {"dv": 2.5, "unit": "mcg", "source": "ICMR-NIN 2024"},
 }
 
 # Complete field definitions for the UI and validation

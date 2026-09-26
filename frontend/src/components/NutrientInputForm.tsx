@@ -542,7 +542,7 @@ export const NutrientInputForm: React.FC<NutrientInputFormProps> = ({
       )}
 
       {/* ------------------------------------------------------------- */}
-      {/* 3. CORE MICRONUTRIENTS (ICMR-NIN 2020 RDA CALIBRATED)         */}
+      {/* 3. CORE MICRONUTRIENTS (ICMR-NIN 2024 RDA CALIBRATED)         */}
       {/* ------------------------------------------------------------- */}
       <div className="bg-white rounded-3xl p-5 sm:p-7 border border-teal-200/90 shadow-xs relative overflow-hidden">
         <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-teal-500 to-teal-700" />
@@ -556,7 +556,7 @@ export const NutrientInputForm: React.FC<NutrientInputFormProps> = ({
               <div className="flex items-center gap-2 flex-wrap">
                 <h3 className="text-base font-bold text-slate-900">Essential Micronutrients</h3>
                 <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-800 border border-teal-200 whitespace-nowrap shrink-0">
-                  ICMR-NIN 2020 RDA Denominators
+                  ICMR-NIN 2024 RDA Denominators
                 </span>
               </div>
               <p className="text-xs text-slate-500 mt-0.5">

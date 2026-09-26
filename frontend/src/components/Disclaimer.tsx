@@ -10,10 +10,10 @@ export const Disclaimer: React.FC = () => {
           <span>Scientific Profiling Prototype & Educational Tool</span>
         </div>
         <p className="text-xs text-slate-500 leading-relaxed">
-          <strong>Disclaimer:</strong> This tool provides an algorithmic nutritional estimate based on entered values and ICMR-NIN 2020 dietary reference guidelines. It is designed for recipe evaluation and nutrient profiling research, not for clinical medical diagnosis or personalized healthcare advice.
+          <strong>Disclaimer:</strong> This tool provides an algorithmic nutritional estimate based on entered values and ICMR-NIN 2024 dietary reference guidelines. It is designed for recipe evaluation and nutrient profiling research, not for clinical medical diagnosis or personalized healthcare advice.
         </p>
         <p className="text-[11px] text-slate-400 mt-2">
-          NutriScore AI &bull; Based on research with the Indian Nutrient Databank (INDB) & ICMR-NIN 2020 RDA.
+          NutriScore AI &bull; Based on research with the Indian Food Composition Tables (IFCT 2017) & ICMR-NIN 2024 RDA.
         </p>
       </div>
     </footer>
