@@ -19,9 +19,9 @@ export const Header: React.FC<HeaderProps> = ({ onReset, onOpenInfo, hasResult }
           {/* Logo Mark */}
           <div className="relative shrink-0 flex items-center">
             <img
-              src="/logo.png"
+              src="/logo.png?v=3"
               alt="NutriScore AI Logo"
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl object-contain shadow-sm ring-1 ring-emerald-500/20 hover:scale-105 transition-transform duration-200"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl object-contain drop-shadow-sm hover:scale-105 transition-transform duration-200"
             />
           </div>
 
