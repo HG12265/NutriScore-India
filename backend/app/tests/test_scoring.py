@@ -152,19 +152,20 @@ def test_lentils_vs_sugary_snack_scoring():
     assert jalebi_result.negative_points > jalebi_result.positive_points
 
 
-def test_official_nutri_score_protein_rule():
-    # High negative points (>= 11) with low fruit/veg (< 80%) should exclude protein points
-    high_neg_food = {
-        "food_name": "Processed Meat Snack",
-        "serving_size": 100.0,
-        "energy_kcal": 350.0,
-        "free_sugars": 10.0,
-        "saturated_fat": 9.0,
-        "sodium": 950.0,
-        "cholesterol": 80.0,
-        "protein": 18.0,
-        "fibre": 0.5,
-        "fruit_veg_legume_pct": 10.0,
+def test_icmr_baseline_scoring():
+    food = {
+        "food_name": "Sambar Rice",
+        "serving_size": 200.0,
+        "energy_kcal": 210.0,
+        "free_sugars": 1.0,
+        "saturated_fat": 1.0,
+        "sodium": 320.0,
+        "cholesterol": 0.0,
+        "protein": 8.0,
+        "fibre": 5.0,
+        "iron": 2.5,
+        "calcium": 60.0,
     }
-    result = calculate_nutriscore(high_neg_food, mode=AlgorithmMode.OFFICIAL_NS)
-    assert result.grade in ("D", "E")
+    result = calculate_nutriscore(food, mode=AlgorithmMode.ICMR_16)
+    assert result.health_score > 0
+    assert result.grade in ("A", "B", "C", "D", "E")

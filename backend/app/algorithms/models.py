@@ -5,10 +5,10 @@ from pydantic import BaseModel, Field
 
 
 class AlgorithmMode(str, Enum):
-    ICMR_16 = "icmr_16_nutrient"
-    FULL_39 = "full_39_nutrient"
-    OFFICIAL_NS = "official_nutri_score"
+    ICMR_NIN_2024 = "icmr_nin_2024"
     PERSONALISED_PNDPQ = "personalised_pndpq"
+    FULL_39 = "full_39_nutrient"
+    ICMR_16 = "icmr_16_nutrient"
 
 
 class NutrientCategory(str, Enum):

@@ -436,16 +436,11 @@ def calculate_nutriscore(data: Dict[str, Any], mode: AlgorithmMode = AlgorithmMo
         health_score = max(0.0, min(100.0, health_score))
         grade, grade_color, grade_label, grade_desc = map_health_score_to_grade(health_score)
         
-    else:  # OFFICIAL_NS
-        # Official FSA-NPS solid food formula
-        fvl_pct = get_val("fruit_veg_legume_pct")
-        # In FSA-NPS, if N >= 11, protein is counted only if fruit/veg/legume >= 80%
-        effective_positive = positive_points
-        if negative_points >= 11.0 and fvl_pct < 80.0:
-            effective_positive -= pts_protein
-        fsa_raw = negative_points - effective_positive
-        grade, grade_color, grade_label, grade_desc = map_official_raw_to_grade(fsa_raw)
-        health_score = max(0.0, min(100.0, 100.0 * (40.0 - fsa_raw) / 55.0))
+    else:
+        # Default ICMR Indian baseline model
+        health_score = 100.0 * (50.0 - raw_score) / 120.0
+        health_score = max(0.0, min(100.0, health_score))
+        grade, grade_color, grade_label, grade_desc = map_health_score_to_grade(health_score)
 
     # Contributors
     positive_contributors = sorted(

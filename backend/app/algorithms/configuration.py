@@ -3,38 +3,38 @@ from typing import Dict, Any, List
 
 # Algorithm metadata
 ALGORITHM_METADATA = {
-    "icmr_16_nutrient": {
-        "title": "ICMR 16-Nutrient Indian Recipe Profiling Model",
-        "version": "1.0-INDB",
-        "description": "Calibrated for Indian traditional recipes using ICMR-NIN 2020 Daily Values. Features 5 negative nutrients (max 50 pts) and 11 positive nutrients (max 70 pts).",
-        "negative_max": 50.0,
-        "positive_max": 70.0,
-        "span": 120.0,
+    "icmr_nin_2024": {
+        "title": "ICMR-NIN 2024 Scientific Indian Recipe NutriScore",
+        "version": "2024-ICMR/NIN/IFCT",
+        "description": "Formulated strictly in compliance with ICMR-NIN 2024 Dietary Guidelines for Indians, Revised 2024 RDAs, and IFCT 2017 Databanks. Evaluates 11 demographic life stages, Indian cereal-pulse protein complementarity, 9 Essential Amino Acids, and chronic risk thresholds.",
+        "negative_max": 100.0,
+        "positive_max": 100.0,
+        "span": 100.0,
+    },
+    "personalised_pndpq": {
+        "title": "ICMR-NIN 2024 Scientific Indian Recipe NutriScore",
+        "version": "2024-ICMR/NIN/IFCT",
+        "description": "Formulated strictly in compliance with ICMR-NIN 2024 Dietary Guidelines for Indians, Revised 2024 RDAs, and IFCT 2017 Databanks. Evaluates 11 demographic life stages, Indian cereal-pulse protein complementarity, 9 Essential Amino Acids, and chronic risk thresholds.",
+        "negative_max": 100.0,
+        "positive_max": 100.0,
+        "span": 100.0,
     },
     "full_39_nutrient": {
-        "title": "Extended 39-Nutrient Comprehensive Profiling Model",
-        "version": "1.0-Comprehensive",
-        "description": "Exhaustive model scoring all 39 food components in the Indian Nutrient Databank (INDB) with 5 negative nutrients (max 50 pts) and 30 positive nutrients (max 165 pts).",
+        "title": "IFCT 2017 Comprehensive 39-Component Model",
+        "version": "2017-IFCT/NIN",
+        "description": "Exhaustive model scoring all 39 food components in the Indian Food Composition Tables (IFCT 2017, National Institute of Nutrition - ICMR).",
         "negative_max": 50.0,
         "positive_max": 165.0,
         "span": 215.0,
     },
-    "official_nutri_score": {
-        "title": "Standard Nutri-Score (FSA-NPS Model)",
-        "version": "2024-SolidFoods",
-        "description": "European FSA-NPS general solid food profiling model with energy, saturated fat, sugars, sodium vs fibre, protein, and fruit/veg percentage.",
-        "negative_max": 40.0,
-        "positive_max": 15.0,
-        "span": 55.0,
+    "icmr_16_nutrient": {
+        "title": "ICMR 16-Nutrient Baseline Model",
+        "version": "1.0-INDB",
+        "description": "Calibrated for Indian traditional recipes using ICMR-NIN Daily Values.",
+        "negative_max": 50.0,
+        "positive_max": 70.0,
+        "span": 120.0,
     },
-    "personalised_pndpq": {
-        "title": "Personalised Protein Quality & Nutrient Density (PPQND) NutriScore",
-        "version": "2024-ICMR/FAO",
-        "description": "Evaluates dishes against individual demographic RDA requirements (11 life stages), 9 Essential Amino Acids, Complementary Protein synergy, and 7 chronic disease risk factors with a 7-tier grade (A+ to F).",
-        "negative_max": 100.0,
-        "positive_max": 100.0,
-        "span": 100.0,
-    }
 }
 
 # Standard Reference Daily Values (Adult Moderate Work baseline based on ICMR-NIN 2020)

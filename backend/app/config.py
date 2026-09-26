@@ -33,8 +33,8 @@ class Settings(BaseSettings):
             return [o.strip() for o in val.split(",") if o.strip()]
         return list(self.CORS_ORIGINS)
     
-    # Algorithm configuration: icmr_16_nutrient | full_39_nutrient | official_nutri_score
-    DEFAULT_ALGORITHM_MODE: str = "icmr_16_nutrient"
+    # 100% Indian Algorithm configuration: icmr_nin_2024 | full_39_nutrient | icmr_16_nutrient
+    DEFAULT_ALGORITHM_MODE: str = "icmr_nin_2024"
     
     # MongoDB integration (Strictly MongoDB, no SQL)
     ENABLE_HISTORY: bool = True

@@ -13,7 +13,7 @@ class FoodAnalysisRequest(BaseModel):
     recipe_description: Optional[str] = Field(None, max_length=500, description="Optional recipe notes or ingredient list")
     
     # Algorithm Selection & Personalised Demographic Profile
-    algorithm_mode: AlgorithmMode = Field(AlgorithmMode.ICMR_16, description="Scoring model version to utilize")
+    algorithm_mode: AlgorithmMode = Field(AlgorithmMode.ICMR_NIN_2024, description="Scoring model version to utilize")
     demographic_profile: Optional[str] = Field("adult_male", description="Life stage profile e.g. toddler, child, adolescent_male, adolescent_female, adult_male, adult_female, pregnant_woman, lactating_woman, senior_citizen, athlete")
     complementary_protein_source: Optional[str] = Field("cereal_pulse", description="Protein complementarity matrix source e.g. cereal_pulse, pulse_dairy, soy_cereal, egg_pulse, animal_source, single_cereal, single_pulse")
 

@@ -697,39 +697,7 @@ export const NutrientInputForm: React.FC<NutrientInputFormProps> = ({
 
       {/* ------------------------------------------------------------- */}
       {/* 4. OFFICIAL NUTRI-SCORE SPECIFIC FIELD (If Official Mode)     */}
-      {/* ------------------------------------------------------------- */}
-      {formData.algorithm_mode === 'official_nutri_score' && (
-        <div className="bg-amber-50/70 rounded-3xl p-5 sm:p-7 border border-amber-200 shadow-xs">
-          <div className="flex items-center gap-2 mb-2">
-            <Sparkles className="w-5 h-5 text-amber-600" />
-            <h3 className="text-sm font-bold text-slate-900">
-              European FSA-NPS Fruits, Vegetables, Legumes & Nuts Proportion
-            </h3>
-          </div>
-          <div className="max-w-xs mt-3">
-            <label htmlFor="fruit_veg_legume_pct" className="block text-xs font-bold text-slate-700 mb-1">
-              Fruit / Veg / Legume / Nut % (0 - 100)
-            </label>
-            <div className="relative rounded-2xl shadow-2xs border border-amber-300 bg-white focus-within:border-amber-500 focus-within:ring-3 focus-within:ring-amber-500/15 transition-all overflow-hidden">
-              <input
-                id="fruit_veg_legume_pct"
-                type="number"
-                min="0"
-                max="100"
-                step="any"
-                value={formData.fruit_veg_legume_pct}
-                onChange={(e) => onChange('fruit_veg_legume_pct', e.target.value === '' ? '' : Number(e.target.value))}
-                placeholder="0"
-                className="w-full px-3.5 py-3 text-sm bg-white focus:outline-none pr-8 font-medium"
-              />
-              <span className="absolute right-3 top-3 text-xs font-bold text-slate-400 pointer-events-none">%</span>
-            </div>
-            <p className="mt-1 text-[11px] text-slate-500">
-              In FSA rules: &gt;40% awards 1 pt, &gt;60% awards 2 pts, &gt;80% awards 5 pts.
-            </p>
-          </div>
-        </div>
-      )}
+
 
       {/* ------------------------------------------------------------- */}
       {/* 5. EXTENDED 39-NUTRIENT ACCORDION                            */}

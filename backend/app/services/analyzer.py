@@ -38,8 +38,8 @@ async def analyze_food_request(request: FoodAnalysisRequest) -> Tuple[FoodAnalys
     if not is_valid:
         raise ValueError("; ".join(errors))
 
-    # 2. Check if Personalised PPQND mode is requested
-    if request.algorithm_mode == AlgorithmMode.PERSONALISED_PNDPQ:
+    # 2. Check if ICMR-NIN 2024 Personalised mode is requested
+    if request.algorithm_mode in (AlgorithmMode.ICMR_NIN_2024, AlgorithmMode.PERSONALISED_PNDPQ):
         # Prepare nutrients per serving
         nutrients_per_serving: Dict[str, float] = {
             "energy_kcal": request.energy_kcal,

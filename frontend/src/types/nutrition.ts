@@ -1,4 +1,4 @@
-export type AlgorithmMode = 'icmr_16_nutrient' | 'full_39_nutrient' | 'official_nutri_score' | 'personalised_pndpq';
+export type AlgorithmMode = 'personalised_pndpq' | 'icmr_nin_2024' | 'full_39_nutrient' | 'icmr_16_nutrient';
 
 export interface NutrientScoreDetail {
   nutrient_key: string;
